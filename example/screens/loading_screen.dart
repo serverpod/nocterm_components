@@ -1,6 +1,32 @@
+import 'dart:async';
+
 import 'package:nocterm/nocterm.dart';
 
-class LoadingScreen extends StatelessComponent {
+class LoadingScreen extends StatefulComponent {
+  @override
+  State<StatefulComponent> createState() {
+    return _LoadingScreenState();
+  }
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _timer = Timer.periodic(Duration(milliseconds: 50), (_) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer?.cancel();
+  }
+
   @override
   Component build(BuildContext context) {
     return Center(
